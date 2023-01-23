@@ -1,8 +1,19 @@
-import { FontAwesome } from "@expo/vector-icons";
+import {
+  AntDesign,
+  FontAwesome,
+  FontAwesome5,
+  Ionicons,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Pressable } from "react-native";
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
+import Home from "../screens/BottomTabs/Home";
+import Inbox from "../screens/BottomTabs/Inbox";
+import Pools from "../screens/BottomTabs/Pools";
+import Profile from "../screens/BottomTabs/Profile";
+import Swim from "../screens/BottomTabs/Swim";
 import TabOneScreen from "../screens/TabOneScreen";
 import TabTwoScreen from "../screens/TabTwoScreen";
 import { RootTabParamList, RootTabScreenProps } from "../types";
@@ -14,17 +25,19 @@ export function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="Home"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}
     >
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<"TabOne">) => ({
-          title: "Tab One",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+        name="Home"
+        component={Home}
+        options={({ navigation }: RootTabScreenProps<"Home">) => ({
+          title: "Home",
+          tabBarIcon: ({ color }) => (
+            <AntDesign name="home" size={24} color={color} />
+          ),
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate("Modal")}
@@ -43,11 +56,43 @@ export function BottomTabNavigator() {
         })}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
+        name="Pools"
+        component={Pools}
         options={{
-          title: "Tab Two",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: "Pools",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="waves" size={24} color={color} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Swim"
+        component={Swim}
+        options={{
+          title: "Swim",
+          tabBarIcon: ({ color }) => (
+            <FontAwesome5 name="swimmer" size={24} color={color} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Inbox"
+        component={Inbox}
+        options={{
+          title: "Inbox",
+          tabBarIcon: ({ color }) => (
+            <AntDesign name="inbox" size={24} color={color} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          title: "Profile",
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="person-outline" size={24} color={color} />
+          ),
         }}
       />
     </BottomTab.Navigator>
